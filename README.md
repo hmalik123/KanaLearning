@@ -50,10 +50,4 @@ To get started with this project, follow the steps below:
 
 - Quizzes and Practice Exercises: Add quizzes and interactive exercises to test the user's knowledge of Hiragana and Katakana
 
-- Progress Tracking: Implement a system to track the user's progress in learning the characters
-
-- Dark Mode: Add a toggle for dark mode for a better user experience in low-light environments
-
-- Add an option to reveal answer for each character
-
 - Add option to test multiple lines of Kana which the user chooses

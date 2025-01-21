@@ -160,6 +160,15 @@ const englishNames = {
     'ん': 'n'
 };
 
+const shuffleArray = (array) => {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+    }
+    return shuffled;
+};
+
 const Hiragana = () => {
     const [selectedLine, setSelectedLine] = useState('a');
     const [currentLine, setCurrentLine] = useState([]);
@@ -167,6 +176,7 @@ const Hiragana = () => {
     const [showResult, setShowResult] = useState(false);
     const [isPracticing, setIsPracticing] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [randomize, setRandomize] = useState(false);
 
     const handleLineChange = (e) => {
         setSelectedLine(e.target.value);
@@ -176,7 +186,11 @@ const Hiragana = () => {
     };
 
     const startPractice = () => {
-        setCurrentLine(hiraganaLines[selectedLine]);
+        let line = hiraganaLines[selectedLine];
+        if (randomize) {
+            line = shuffleArray(line);  // Apply Fisher-Yates shuffle
+        }
+        setCurrentLine(line);
         setCurrentIndex(0);
         setIsPracticing(true);
         setShowResult(false);
@@ -218,36 +232,46 @@ const Hiragana = () => {
                 <div className={styles.card}>
                     <label htmlFor="line">Choose a line to practice:</label>
                     <select id="line" value={selectedLine} onChange={handleLineChange}>
-                        <option value="a">a i u e o</option>
-                        <option value="ka">ka ki ku ke ko</option>
-                        <option value="sa">sa shi su se so</option>
-                        <option value="ta">ta chi tsu te to</option>
-                        <option value="na">na ni nu ne no</option>
-                        <option value="ha">ha hi fu he ho</option>
-                        <option value="ma">ma mi mu me mo</option>
-                        <option value="ya">ya yu yo</option>
-                        <option value="ra">ra ri ru re ro</option>
-                        <option value="wa">wa wo</option>
-                        <option value="n">n</option>
-                        <option value="all">All Hiragana</option>
+                    <option value="a">a i u e o</option>
+                    <option value="ka">ka ki ku ke ko</option>
+                    <option value="sa">sa shi su se so</option>
+                    <option value="ta">ta chi tsu te to</option>
+                    <option value="na">na ni nu ne no</option>
+                    <option value="ha">ha hi fu he ho</option>
+                    <option value="ma">ma mi mu me mo</option>
+                    <option value="ya">ya yu yo</option>
+                    <option value="ra">ra ri ru re ro</option>
+                    <option value="wa">wa wo</option>
+                    <option value="n">n</option>
+                    <option value="all">All Hiragana</option>
+
                     </select>
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="randomize"
+                            checked={randomize}
+                            onChange={() => setRandomize(!randomize)}
+                        />
+                        <label htmlFor="randomize">Randomize</label>
+                    </div>
                     <button onClick={startPractice}>Let's Practice</button>
                 </div>
             )}
             {isPracticing && !showResult && (
                 <div className={styles.card}>
                     <div
-    id="flashcard"
-    className={`${styles.hiragana} ${isFlipped ? styles.flipped : ''}`}
-    onClick={toggleFlip}
->
-    <div className={styles.front}>
-        {currentLine[currentIndex]}
-    </div>
-    <div className={styles.back}>
-        {englishNames[currentLine[currentIndex]]}
-    </div>
-</div>
+                        id="flashcard"
+                        className={`${styles.hiragana} ${isFlipped ? styles.flipped : ''}`}
+                        onClick={toggleFlip}
+                    >
+                        <div className={styles.front}>
+                            {currentLine[currentIndex]}
+                        </div>
+                        <div className={styles.back}>
+                            {englishNames[currentLine[currentIndex]]}
+                        </div>
+                    </div>
                     <div className={styles.controls}>
                         <button onClick={showNext}>Next</button>
                         <button onClick={playSound} className={styles.speakerIcon}>🔊</button>
