@@ -22,9 +22,9 @@ To get started with this project, follow the steps below:
 
 1. **Clone the repository**:
 
-   ```bash
+```bash
    git clone https://github.com/your-username/KanaLearning.git
-   ```
+```
 
 2. **Change directory**:
 
@@ -46,7 +46,7 @@ To get started with this project, follow the steps below:
 
 - Open your browser and visit http://localhost:5173 to view the app.
 
-- Future Improvements
+# Future Improvements
 
 - Quizzes and Practice Exercises: Add quizzes and interactive exercises to test the user's knowledge of Hiragana and Katakana
 
