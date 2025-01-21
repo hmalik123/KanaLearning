@@ -26,16 +26,36 @@ To get started with this project, follow the steps below:
    git clone https://github.com/your-username/KanaLearning.git
    ```
 
-## cd KanaLearning
+2. **Change directory**:
 
-## npm install
+```bash
+   cd KanaLearning
+```
 
-## npm start
+3. **Install dependencies**:
+
+```bash
+   npm install
+```
+
+4. **Run application**:
+
+```bash
+   npm run dev
+```
 
 - Open your browser and visit http://localhost:5173 to view the app.
 
 - Future Improvements
-- Quizzes and Practice Exercises: Add quizzes and interactive exercises to test the user's knowledge of Hiragana and Katakana.
-- Progress Tracking: Implement a system to track the user's progress in learning the characters.
-- Audio Pronunciation: Add audio support to hear how each character is pronounced.
-- Dark Mode: Add a toggle for dark mode for a better user experience in low-light environments.
+
+- Quizzes and Practice Exercises: Add quizzes and interactive exercises to test the user's knowledge of Hiragana and Katakana
+
+- Progress Tracking: Implement a system to track the user's progress in learning the characters
+
+- Audio Pronunciation: Add audio support to hear how each character is pronounced
+
+- Dark Mode: Add a toggle for dark mode for a better user experience in low-light environments
+
+- Add an option to reveal answer for each character
+
+- Add option to test multiple lines of Kana which the user chooses
