@@ -1,6 +1,6 @@
-# Japanese Alphabet Learning App
+# Japanese Kana Learning App
 
-This project is a simple web application designed to help users learn the two main Japanese alphabets: **Hiragana** and **Katakana**. The app provides a user-friendly interface for navigating between the two sections, each dedicated to teaching and displaying the characters of the respective alphabet.
+A simple web app which helps users learn **Hiragana** and **Katakana** Allowing users to test their knowledge against characters line by line or by the entire alphabet
 
 ## Features
 
