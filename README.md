@@ -52,8 +52,6 @@ To get started with this project, follow the steps below:
 
 - Progress Tracking: Implement a system to track the user's progress in learning the characters
 
-- Audio Pronunciation: Add audio support to hear how each character is pronounced
-
 - Dark Mode: Add a toggle for dark mode for a better user experience in low-light environments
 
 - Add an option to reveal answer for each character

@@ -45,6 +45,15 @@ button {
     font-size: 1em;
 }
 
+.speakerIcon {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    /* Adjusted size */
+    cursor: pointer;
+    margin-left: 10px;
+}
+
 /* Media Queries */
 @media (max-width: 1200px) {
     .hiragana {
@@ -88,7 +97,7 @@ button {
 
 @media (max-width: 576px) {
     .hiragana {
-        font-size: 4em;
+        font-size: 8em;
     }
 
     h1 {
