@@ -1,0 +1,59 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2f2954;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    /* Centre the navbar links */
+    align-items: center;
+    /* Vertically centre the items */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    /* Ensures the navbar is on top */
+}
+
+.link {
+    margin-right: 50px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.link:last-child {
+    margin-right: 0;
+}
+
+.link:hover {
+    color: #0056b3;
+    /* Slightly darker blue on hover */
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        /* Keep the links side by side on mobile */
+        justify-content: center;
+        /* Centre the links horizontally */
+        align-items: center;
+        /* Keep the items vertically centered */
+        padding-top: 10px;
+        /* Adjust padding for mobile */
+    }
+
+    .link {
+        margin-right: 30px;
+        /* Adjust margin to make the links closer on mobile */
+        font-size: 1.4rem;
+        /* Slightly reduce font size on mobile */
+    }
+
+    .link:last-child {
+        margin-right: 0;
+        /* Remove margin for the last link */
+    }
+}
