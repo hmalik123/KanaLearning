@@ -24,9 +24,51 @@
 
 .hiragana {
     font-size: 10em;
+    /* Set back to the large size */
     font-weight: bold;
-    margin: 20px;
+    color: #fff;
+    /* Maintain visibility on a dark background */
+    cursor: pointer;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 150px auto;
+    /* Adds spacing around it */
 }
+
+.hiragana.flipped {
+    transform: rotateY(180deg);
+}
+
+.hiragana .front,
+.hiragana .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hiragana .back {
+    transform: rotateY(180deg);
+}
+
+/* Adjust buttons and controls to avoid overlap */
+.controls {
+    margin-top: 40px;
+    /* Increase margin below the character */
+}
+
+button {
+    z-index: 1;
+    /* Ensure buttons always stay above other elements */
+}
+
 
 .controls {
     margin-top: 20px;
@@ -98,7 +140,7 @@ button {
 
 @media (max-width: 576px) {
     .hiragana {
-        font-size: 8em;
+        font-size: 12em;
     }
 
     h1 {
@@ -111,5 +153,16 @@ button {
 
     nav a {
         font-size: 1.2em;
+    }
+
+    .controls {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        /* Ensure items are in a row */
+        gap: 2px;
+        /* Add some gap between the button and the sound icon */
     }
 }

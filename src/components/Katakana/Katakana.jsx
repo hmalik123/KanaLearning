@@ -111,6 +111,55 @@ const sounds = {
     'ン': kanasoundN
 };
 
+const englishNames = {
+    'ア': 'a',
+    'イ': 'i',
+    'ウ': 'u',
+    'エ': 'e',
+    'オ': 'o',
+    'カ': 'ka',
+    'キ': 'ki',
+    'ク': 'ku',
+    'ケ': 'ke',
+    'コ': 'ko',
+    'サ': 'sa',
+    'シ': 'shi',
+    'ス': 'su',
+    'セ': 'se',
+    'ソ': 'so',
+    'タ': 'ta',
+    'チ': 'chi',
+    'ツ': 'tsu',
+    'テ': 'te',
+    'ト': 'to',
+    'ナ': 'na',
+    'ニ': 'ni',
+    'ヌ': 'nu',
+    'ネ': 'ne',
+    'ノ': 'no',
+    'ハ': 'ha',
+    'ヒ': 'hi',
+    'フ': 'fu',
+    'ヘ': 'he',
+    'ホ': 'ho',
+    'マ': 'ma',
+    'ミ': 'mi',
+    'ム': 'mu',
+    'メ': 'me',
+    'モ': 'mo',
+    'ヤ': 'ya',
+    'ユ': 'yu',
+    'ヨ': 'yo',
+    'ラ': 'ra',
+    'リ': 'ri',
+    'ル': 'ru',
+    'レ': 're',
+    'ロ': 'ro',
+    'ワ': 'wa',
+    'ヲ': 'wo',
+    'ン': 'n'
+};
+
 
 const Katakana = () => {
     const [selectedLine, setSelectedLine] = useState('a');
@@ -118,11 +167,13 @@ const Katakana = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [isPracticing, setIsPracticing] = useState(false);
+    const [isFlipped, setIsFlipped] = useState(false);
 
     const handleLineChange = (e) => {
         setSelectedLine(e.target.value);
         setIsPracticing(false);
         setShowResult(false);
+        setIsFlipped(false);
     };
 
     const startPractice = () => {
@@ -130,11 +181,13 @@ const Katakana = () => {
         setCurrentIndex(0);
         setIsPracticing(true);
         setShowResult(false);
+        setIsFlipped(false);
     };
 
     const showNext = () => {
         if (currentIndex < currentLine.length - 1) {
             setCurrentIndex(currentIndex + 1);
+            setIsFlipped(false);
         } else {
             setShowResult(true);
             setIsPracticing(false);
@@ -144,6 +197,7 @@ const Katakana = () => {
     const restart = () => {
         setIsPracticing(false);
         setShowResult(false);
+        setIsFlipped(false);
     };
 
     const playSound = () => {
@@ -152,6 +206,10 @@ const Katakana = () => {
             const audio = new Audio(sound);
             audio.play();
         }
+    };
+
+    const toggleFlip = () => {
+        setIsFlipped(!isFlipped);
     };
 
     return (
@@ -179,8 +237,17 @@ const Katakana = () => {
             )}
             {isPracticing && !showResult && (
                 <div className={styles.card}>
-                    <div id="flashcard" className={styles.hiragana}>
-                        {currentLine[currentIndex]}
+                                <div
+                        id="flashcard"
+                        className={`${styles.hiragana} ${isFlipped ? styles.flipped : ''}`}
+                        onClick={toggleFlip}
+                    >
+                        <div className={styles.front}>
+                            {currentLine[currentIndex]}
+                        </div>
+                        <div className={styles.back}>
+                            {englishNames[currentLine[currentIndex]]}
+                        </div>
                     </div>
                     <div className={styles.controls}>
                         <button onClick={showNext}>Next</button>

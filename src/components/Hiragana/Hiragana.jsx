@@ -47,7 +47,6 @@ import kanasoundWa from '../../assets/kanasound-wa.mp3';
 import kanasoundWo from '../../assets/kanasound-wo.mp3';
 import kanasoundN from '../../assets/kanasound-n.mp3';
 
-
 const hiraganaLines = {
     a: ['あ', 'い', 'う', 'え', 'お'],
     ka: ['か', 'き', 'く', 'け', 'こ'],
@@ -112,6 +111,54 @@ const sounds = {
     'ん': kanasoundN
 };
 
+const englishNames = {
+    'あ': 'a',
+    'い': 'i',
+    'う': 'u',
+    'え': 'e',
+    'お': 'o',
+    'か': 'ka',
+    'き': 'ki',
+    'く': 'ku',
+    'け': 'ke',
+    'こ': 'ko',
+    'さ': 'sa',
+    'し': 'shi',
+    'す': 'su',
+    'せ': 'se',
+    'そ': 'so',
+    'た': 'ta',
+    'ち': 'chi',
+    'つ': 'tsu',
+    'て': 'te',
+    'と': 'to',
+    'な': 'na',
+    'に': 'ni',
+    'ぬ': 'nu',
+    'ね': 'ne',
+    'の': 'no',
+    'は': 'ha',
+    'ひ': 'hi',
+    'ふ': 'fu',
+    'へ': 'he',
+    'ほ': 'ho',
+    'ま': 'ma',
+    'み': 'mi',
+    'む': 'mu',
+    'め': 'me',
+    'も': 'mo',
+    'や': 'ya',
+    'ゆ': 'yu',
+    'よ': 'yo',
+    'ら': 'ra',
+    'り': 'ri',
+    'る': 'ru',
+    'れ': 're',
+    'ろ': 'ro',
+    'わ': 'wa',
+    'を': 'wo',
+    'ん': 'n'
+};
 
 const Hiragana = () => {
     const [selectedLine, setSelectedLine] = useState('a');
@@ -119,11 +166,13 @@ const Hiragana = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [isPracticing, setIsPracticing] = useState(false);
+    const [isFlipped, setIsFlipped] = useState(false);
 
     const handleLineChange = (e) => {
         setSelectedLine(e.target.value);
         setIsPracticing(false);
         setShowResult(false);
+        setIsFlipped(false);
     };
 
     const startPractice = () => {
@@ -131,11 +180,13 @@ const Hiragana = () => {
         setCurrentIndex(0);
         setIsPracticing(true);
         setShowResult(false);
+        setIsFlipped(false);
     };
 
     const showNext = () => {
         if (currentIndex < currentLine.length - 1) {
             setCurrentIndex(currentIndex + 1);
+            setIsFlipped(false);
         } else {
             setShowResult(true);
             setIsPracticing(false);
@@ -145,6 +196,7 @@ const Hiragana = () => {
     const restart = () => {
         setIsPracticing(false);
         setShowResult(false);
+        setIsFlipped(false);
     };
 
     const playSound = () => {
@@ -153,6 +205,10 @@ const Hiragana = () => {
             const audio = new Audio(sound);
             audio.play();
         }
+    };
+
+    const toggleFlip = () => {
+        setIsFlipped(!isFlipped);
     };
 
     return (
@@ -180,9 +236,18 @@ const Hiragana = () => {
             )}
             {isPracticing && !showResult && (
                 <div className={styles.card}>
-                    <div id="flashcard" className={styles.hiragana}>
-                        {currentLine[currentIndex]}
-                    </div>
+                    <div
+    id="flashcard"
+    className={`${styles.hiragana} ${isFlipped ? styles.flipped : ''}`}
+    onClick={toggleFlip}
+>
+    <div className={styles.front}>
+        {currentLine[currentIndex]}
+    </div>
+    <div className={styles.back}>
+        {englishNames[currentLine[currentIndex]]}
+    </div>
+</div>
                     <div className={styles.controls}>
                         <button onClick={showNext}>Next</button>
                         <button onClick={playSound} className={styles.speakerIcon}>🔊</button>
