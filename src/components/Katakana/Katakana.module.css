@@ -23,7 +23,7 @@
 }
 
 .hiragana {
-    font-size: 10em;
+    font-size: 15em;
     /* Set back to the large size */
     font-weight: bold;
     color: #fff;
@@ -69,6 +69,18 @@ button {
     /* Ensure buttons always stay above other elements */
 }
 
+.resultButtons {
+    display: flex;
+    /* Ensures the buttons are laid out in a row */
+    justify-content: center;
+    /* Aligns the buttons centrally */
+    gap: 20px;
+    /* Adjust this value to increase/decrease spacing */
+    margin-top: 20px;
+    /* Optional: Adds space above the buttons */
+}
+
+
 
 .controls {
     margin-top: 20px;
@@ -97,6 +109,51 @@ button {
     margin-left: 10px;
 }
 
+.checkboxItem {
+    display: flex;
+    align-items: center;
+    /* Corrected 'centre' to 'center' for CSS */
+    justify-content: start;
+    background: #000000;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    color: #333;
+    /* Ensure text is visible */
+}
+
+.checkboxItem input {
+    margin-right: 10px;
+    width: 20px;
+    /* Adjust size for better visibility */
+    height: 20px;
+    /* Adjust size for better visibility */
+    accent-color: #007bff;
+    /* Custom checkbox colour for better visibility */
+    cursor: pointer;
+    /* Add a pointer to show it's clickable */
+}
+
+.checkboxItem label {
+    color: #ffffff;
+    /* Ensure the label is visible on a light background */
+    font-size: 1em;
+    cursor: pointer;
+    /* Add pointer cursor for accessibility */
+}
+
+.checkboxList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+
 /* Media Queries */
 @media (max-width: 1200px) {
     .hiragana {
@@ -110,11 +167,15 @@ button {
 
 @media (max-width: 992px) {
     .hiragana {
-        font-size: 15em;
+        font-size: 16em;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 3.2em;
+    }
+
+    .controls {
+        font-size: 20px;
     }
 }
 
@@ -136,6 +197,31 @@ button {
         margin-bottom: 10px;
         font-size: 1.2em;
     }
+
+    .checkboxList {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        /* Reduce min-width of columns */
+        gap: 8px;
+        /* Reduce gap between items */
+    }
+
+    .checkboxItem {
+        padding: 8px;
+        /* Reduce padding for smaller screens */
+        font-size: 0.9em;
+        /* Reduce text size slightly */
+    }
+
+    .checkboxItem input {
+        width: 18px;
+        /* Smaller checkboxes for tablets */
+        height: 18px;
+    }
+
+    .checkboxItem label {
+        font-size: 0.95em;
+        /* Slightly smaller text */
+    }
 }
 
 @media (max-width: 576px) {
@@ -144,7 +230,8 @@ button {
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 2em;
+        margin-bottom: -20px;
     }
 
     button {
@@ -164,5 +251,49 @@ button {
         /* Ensure items are in a row */
         gap: 2px;
         /* Add some gap between the button and the sound icon */
+    }
+
+    .checkboxItem {
+        display: flex;
+        align-items: center;
+        /* Corrected 'centre' to 'center' for CSS */
+        justify-content: start;
+        background: #000000;
+        padding: 10px;
+        border-radius: 15px;
+        text-align: left;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 1em;
+        color: #333;
+        /* Ensure text is visible */
+        width: 95%;
+        height: 110%;
+    }
+
+    .checkboxList {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 18px;
+        width: 120%;
+        max-width: 320px;
+        margin: 20px auto;
+    }
+
+    .checkboxItem {
+        padding: 4px;
+        /* Reduce padding further for mobile */
+        font-size: 1.22em;
+        /* Smaller text for mobile */
+    }
+
+    .checkboxItem input {
+        width: 12px;
+        /* Smaller checkboxes */
+        height: 12px;
+    }
+
+    .checkboxItem label {
+        font-size: 0.75em;
+        /* Adjust text size for mobile readability */
     }
 }

@@ -160,17 +160,18 @@ const englishNames = {
     'ン': 'n'
 };
 
+// Helper function to shuffle an array
 const shuffleArray = (array) => {
-    let shuffled = [...array];
+    const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
 };
 
 const Katakana = () => {
-    const [selectedLine, setSelectedLine] = useState('a');
+    const [selectedLines, setSelectedLines] = useState(['a']);
     const [currentLine, setCurrentLine] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showResult, setShowResult] = useState(false);
@@ -178,23 +179,48 @@ const Katakana = () => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [randomize, setRandomize] = useState(false);
 
-    const handleLineChange = (e) => {
-        setSelectedLine(e.target.value);
+    const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target;
+
+        setSelectedLines((prevSelected) =>
+            checked ? [...prevSelected, value] : prevSelected.filter((line) => line !== value)
+        );
+
+        // Reset practice states
         setIsPracticing(false);
         setShowResult(false);
         setIsFlipped(false);
     };
 
     const startPractice = () => {
-        setCurrentLine(katakanaLines[selectedLine]);
+        let mergedLines = selectedLines.flatMap((line) => katakanaLines[line]);
+    
         if (randomize) {
-            setCurrentLine(prevLine => shuffleArray(prevLine));
+            mergedLines = shuffleArray(mergedLines); // Shuffle the selection
         }
+    
+        setCurrentLine(mergedLines);
         setCurrentIndex(0);
         setIsPracticing(true);
         setShowResult(false);
         setIsFlipped(false);
     };
+    
+
+    const repeatPractice = () => {
+        let shuffledLines = [...currentLine];
+    
+        if (randomize) {
+            shuffledLines = shuffleArray(currentLine); // Re-shuffle the same selection
+        }
+    
+        setCurrentLine(shuffledLines);
+        setCurrentIndex(0);
+        setIsPracticing(true);
+        setShowResult(false);
+        setIsFlipped(false);
+    };
+    
 
     const showNext = () => {
         if (currentIndex < currentLine.length - 1) {
@@ -229,21 +255,27 @@ const Katakana = () => {
             <h1>Katakana Flash Cards</h1>
             {!isPracticing && !showResult && (
                 <div className={styles.card}>
-                    <label htmlFor="line">Choose a line to practice:</label>
-                    <select id="line" value={selectedLine} onChange={handleLineChange}>
-                        <option value="a">a i u e o</option>
-                        <option value="ka">ka ki ku ke ko</option>
-                        <option value="sa">sa shi su se so</option>
-                        <option value="ta">ta chi tsu te to</option>
-                        <option value="na">na ni nu ne no</option>
-                        <option value="ha">ha hi fu he ho</option>
-                        <option value="ma">ma mi mu me mo</option>
-                        <option value="ya">ya yu yo</option>
-                        <option value="ra">ra ri ru re ro</option>
-                        <option value="wa">wa wo</option>
-                        <option value="n">n</option>
-                        <option value="all">All Katakana</option>
-                    </select>
+                    <h2>Choose lines to practice:</h2>
+                    <div className={styles.checkboxList}>
+                        {Object.keys(katakanaLines).map((line) => (
+                            <div key={line} className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id={line}
+                                    value={line}
+                                    checked={selectedLines.includes(line)}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <label htmlFor={line}>
+                                    {line === 'all'
+                                        ? 'All Katakana'
+                                        : katakanaLines[line]
+                                              .map((char) => englishNames[char])
+                                              .join(' ')}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
                     <div>
                         <input
                             type="checkbox"
@@ -251,9 +283,11 @@ const Katakana = () => {
                             checked={randomize}
                             onChange={() => setRandomize(!randomize)}
                         />
-                        <label htmlFor="randomize">Randomize</label>
+                        <label htmlFor="randomize">Randomise</label>
                     </div>
-                    <button onClick={startPractice}>Let's Practice</button>
+                    <button onClick={startPractice} disabled={selectedLines.length === 0}>
+                        Let's Practice
+                    </button>
                 </div>
             )}
             {isPracticing && !showResult && (
@@ -264,22 +298,27 @@ const Katakana = () => {
                         onClick={toggleFlip}
                     >
                         <div className={styles.front}>
-                            {currentLine[currentIndex]}
+                            {currentLine[currentIndex]} {/* Show Japanese katakana on the front */}
                         </div>
                         <div className={styles.back}>
-                            {englishNames[currentLine[currentIndex]]}
+                            {englishNames[currentLine[currentIndex]]} {/* Show English on the back */}
                         </div>
                     </div>
                     <div className={styles.controls}>
                         <button onClick={showNext}>Next</button>
-                        <button onClick={playSound} className={styles.speakerIcon}>🔊</button>
+                        <button onClick={playSound} className={styles.speakerIcon}>
+                            🔊
+                        </button>
                     </div>
                 </div>
             )}
             {showResult && (
                 <div className={styles.card}>
-                    <h2>Congratulations! You've completed the line.</h2>
-                    <button onClick={restart}>Practice Another Line</button>
+                    <h2>Congratulations! You've completed the lines.</h2>
+                    <div className={styles.resultButtons}>
+                        <button onClick={restart}>Back to Homepage</button>
+                        <button onClick={repeatPractice}>Repeat</button>
+                    </div>
                 </div>
             )}
         </div>
@@ -287,3 +326,5 @@ const Katakana = () => {
 };
 
 export default Katakana;
+
+
