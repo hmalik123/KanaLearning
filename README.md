@@ -1,4 +1,4 @@
-# Japanese Kana Learning App
+# Japanese Kana Learning WebApp
 
 A simple web app which helps users learn **Hiragana** and **Katakana** Allowing users to test their knowledge against characters line by line or by the entire alphabet
 
