@@ -160,6 +160,14 @@ const englishNames = {
     'ン': 'n'
 };
 
+const shuffleArray = (array) => {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Swap elements
+    }
+    return shuffled;
+};
 
 const Katakana = () => {
     const [selectedLine, setSelectedLine] = useState('a');
@@ -168,6 +176,7 @@ const Katakana = () => {
     const [showResult, setShowResult] = useState(false);
     const [isPracticing, setIsPracticing] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [randomize, setRandomize] = useState(false);
 
     const handleLineChange = (e) => {
         setSelectedLine(e.target.value);
@@ -178,6 +187,9 @@ const Katakana = () => {
 
     const startPractice = () => {
         setCurrentLine(katakanaLines[selectedLine]);
+        if (randomize) {
+            setCurrentLine(prevLine => shuffleArray(prevLine));
+        }
         setCurrentIndex(0);
         setIsPracticing(true);
         setShowResult(false);
@@ -232,12 +244,21 @@ const Katakana = () => {
                         <option value="n">n</option>
                         <option value="all">All Katakana</option>
                     </select>
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="randomize"
+                            checked={randomize}
+                            onChange={() => setRandomize(!randomize)}
+                        />
+                        <label htmlFor="randomize">Randomize</label>
+                    </div>
                     <button onClick={startPractice}>Let's Practice</button>
                 </div>
             )}
             {isPracticing && !showResult && (
                 <div className={styles.card}>
-                                <div
+                    <div
                         id="flashcard"
                         className={`${styles.hiragana} ${isFlipped ? styles.flipped : ''}`}
                         onClick={toggleFlip}
