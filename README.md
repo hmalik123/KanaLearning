@@ -4,9 +4,12 @@ A simple web app which helps users learn **Hiragana** and **Katakana** Allowing 
 
 ## Features
 
-- **Hiragana Learning Section**: Learn and practice Hiragana characters with examples.
-- **Katakana Learning Section**: Learn and practice Katakana characters with examples.
-- **Responsive Design**: The app is fully responsive, offering an optimal experience on both desktop and mobile devices.
+- **Hiragana Learning Section**: Learn and practice Hiragana characters with examples
+
+- **Katakana Learning Section**: Learn and practice Katakana characters with examples
+
+- **Responsive Design**: The app is fully responsive, offering an optimal experience on both desktop and mobile devices
+
 - **Simple and Clear Navigation**: The app provides easy-to-use navigation through a fixed navbar, which allows users to switch between Hiragana and Katakana sections.
 
 ## Technologies Used
@@ -50,4 +53,6 @@ To get started with this project, follow the steps below:
 
 - Quizzes and Practice Exercises: Add quizzes and interactive exercises to test the user's knowledge of Hiragana and Katakana
 
-- Add option to test multiple lines of Kana which the user chooses
+- Add pages to learn --> dakuon, handakuon, youon & |youon with dakuten and handakuten| , sokuon & chouon
+
+- Eventually add a backend for user to track progress
