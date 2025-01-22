@@ -253,6 +253,18 @@ button {
         /* Add some gap between the button and the sound icon */
     }
 
+    .resultButtons {
+        display: flex;
+        /* Ensures the buttons are laid out in a row */
+        justify-content: center;
+        /* Aligns the buttons centrally */
+        gap: 20px;
+        /* Adjust this value to increase/decrease spacing */
+        margin-top: 20px;
+        /* Optional: Adds space above the buttons */
+        width: 150%;
+    }
+
     .checkboxItem {
         display: flex;
         align-items: center;
