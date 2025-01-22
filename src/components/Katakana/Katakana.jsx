@@ -193,6 +193,7 @@ const Katakana = () => {
     };
 
     const startPractice = () => {
+        
         let mergedLines = selectedLines.flatMap((line) => katakanaLines[line]);
     
         if (randomize) {
@@ -314,10 +315,10 @@ const Katakana = () => {
             )}
             {showResult && (
                 <div className={styles.card}>
-                    <h2>Congratulations! You've completed the lines.</h2>
+                    <h2>Complete!</h2>
                     <div className={styles.resultButtons}>
-                        <button onClick={restart}>Back to Homepage</button>
-                        <button onClick={repeatPractice}>Repeat</button>
+                        <button onClick={restart}>Homepage</button>
+                        <button onClick={repeatPractice}>Once More! もう一度</button>
                     </div>
                 </div>
             )}
@@ -326,5 +327,3 @@ const Katakana = () => {
 };
 
 export default Katakana;
-
-
