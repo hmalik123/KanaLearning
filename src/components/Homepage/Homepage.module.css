@@ -1,0 +1,89 @@
+/* Import Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800&display=swap');
+
+body,
+html {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.homepageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: var(--color-background);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 300px;
+}
+
+.homepageTitle {
+  font-size: 3.625rem;
+  /* 58px */
+  font-weight: 800;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.homepageText {
+  font-size: 1.4375rem;
+  /* 23px */
+  color: var(--color-secondary);
+  text-align: center;
+  line-height: 1.5;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styling */
+@media (max-width: 1200px) {
+  .homepageTitle {
+    font-size: 3rem;
+    /* 48px */
+    margin-top: 200px;
+  }
+
+  .homepageText {
+    font-size: 1.25rem;
+    /* 20px */
+  }
+}
+
+@media (max-width: 768px) {
+  .homepageTitle {
+    font-size: 2rem;
+    /* 32px */
+    margin-top: 500px;
+  }
+
+  .homepageText {
+    font-size: 1.125rem;
+    /* 18px */
+  }
+}
+
+@media (max-width: 576px) {
+  .homepageContainer {
+    padding: 20px;
+    margin-top: -700px;
+  }
+
+  .homepageTitle {
+    font-size: 2.75rem;
+    /* 44px */
+  }
+
+  .homepageText {
+    font-size: 1.125rem;
+    /* 18px */
+  }
+}
