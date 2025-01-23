@@ -49,10 +49,17 @@
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    /* Prevent backface from showing */
+    -webkit-backface-visibility: hidden;
+    /* WebKit prefix for Safari */
+    -moz-backface-visibility: hidden;
+    /* Add for older Firefox versions */
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
 }
+
 
 .hiragana .back {
     transform: rotateY(180deg);
